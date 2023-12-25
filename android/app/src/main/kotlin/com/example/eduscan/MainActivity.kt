@@ -1,4 +1,4 @@
-package com.example.tubes_kel3
+package com.example.eduscan
 
 import io.flutter.embedding.android.FlutterActivity
 

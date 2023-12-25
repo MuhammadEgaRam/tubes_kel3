@@ -77,30 +77,28 @@ class _pageSignIn extends State<pageSignIn> {
                 _signIn();
               },
               child: Container(
-                alignment: Alignment
-                    .center, // Mengganti MainAxisAlignment dengan Alignment
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.riwayat);
-                  },
-                  style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.all(Size(300, 50)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                  ),
-                  child: _isSigning
-                      ? CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : Text(
-                          'Masuk',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
+                alignment: Alignment.center,
+                constraints: BoxConstraints(
+                  minWidth: 300,
+                  minHeight: 50,
                 ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.blue, // Sesuaikan dengan warna yang diinginkan
+                ),
+                child: _isSigning
+                    ? CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : Text(
+                        'Masuk',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors
+                              .white, // Sesuaikan dengan warna yang diinginkan
+                        ),
+                      ),
               ),
             ),
             SizedBox(
@@ -189,7 +187,7 @@ class _pageSignIn extends State<pageSignIn> {
 
     if (user != null) {
       showToast(message: "User is successfully signed in");
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushNamed(context, "/riwayat");
     } else {
       showToast(message: "some error occured");
     }
