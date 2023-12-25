@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "477314159745",
-    "project_id": "eduscan-abd9a",
-    "storage_bucket": "eduscan-abd9a.appspot.com"
+    "project_number": "772178293651",
+    "project_id": "ocr-mobile-6035f",
+    "storage_bucket": "ocr-mobile-6035f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:477314159745:android:ee1ee139cac9a4db2da980",
+        "mobilesdk_app_id": "1:772178293651:android:949db87bcd722d70c22e66",
         "android_client_info": {
-          "package_name": "com.example.eduscan"
+          "package_name": "com.example.tubes_kel3"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDLqPHKnnqSPN-N_X1Ydhla53WhalvEk6o"
+          "current_key": "AIzaSyD8GLi-Muna9NUpa10BOojP1UHFxGCE5IM"
         }
       ],
       "services": {

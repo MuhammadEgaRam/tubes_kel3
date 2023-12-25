@@ -7,6 +7,7 @@ import 'package:tubes_kel3/widgets/bottom_appbar.dart';
 import 'package:tubes_kel3/widgets/floating_button_appbar.dart';
 import 'package:tubes_kel3/widgets/card_widgets.dart';
 import 'package:tubes_kel3/routes/route.dart';
+import 'package:tubes_kel3/data/ktm_database.dart';
 
 class HistoryV extends StatelessWidget {
   @override
@@ -26,7 +27,21 @@ class HistoryV extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         centerTitle: true,
       ),
-      body: CardWidget(items: InitialData.items),
+      body: FutureBuilder(
+          future: KTMDatabase().all(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return CardWidget(items: snapshot.data ?? []);
+            }
+
+            if (snapshot.hasError) {
+              return Center(child: Text(snapshot.error.toString()));
+            }
+
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
       floatingActionButton:
           FloatingButtonBar(), // ini untuk memanggil widget floating_button_appbar
       floatingActionButtonLocation:

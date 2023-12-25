@@ -10,7 +10,7 @@ class FloatingButtonBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton( 
       onPressed: () {
-        Navigator.pushNamed(context, Routes.scan);
+        Navigator.pushReplacementNamed(context, Routes.scan);
       },
       child: Icon(Icons.camera_alt_outlined),
     );

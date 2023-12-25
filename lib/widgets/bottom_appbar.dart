@@ -18,56 +18,57 @@ class BottomApp extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              IconButton(
-                icon:
-                    Icon(Icons.history_outlined, color: Colors.white, size: 27),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.riwayat);
-                },
-              ),
-              Text(
-                'Riwayat',
-                style: SafeGoogleFont(
-                  'urbanist',
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Flexible(
+                  child: IconButton(
+                    icon: Icon(Icons.history_outlined,
+                        color: Colors.white, size: 27),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, Routes.riwayat);
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 5.0,
-              )
-            ],
+                Text(
+                  'Riwayat',
+                  style: SafeGoogleFont(
+                    'urbanist',
+                    fontWeight: FontWeight.w200,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.settings, color: Colors.white, size: 26),
-                onPressed: () {
-                  // Navigasi ke halaman settings.dart saat tombol "Pengaturan" ditekan
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Settings()), // Sesuaikan dengan nama halaman settings.dart
-                  );
-                },
-              ),
-              Text(
-                'Pengaturan',
-                style: SafeGoogleFont(
-                  'urbanist',
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Flexible(
+                  child: IconButton(
+                    icon: Icon(Icons.settings, color: Colors.white, size: 26),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Settings(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 5.0,
-              )
-            ],
+                Text(
+                  'Pengaturan',
+                  style: SafeGoogleFont(
+                    'urbanist',
+                    fontWeight: FontWeight.w200,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

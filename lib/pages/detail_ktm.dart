@@ -7,6 +7,8 @@ import 'package:tubes_kel3/models/item.dart';
 import 'package:tubes_kel3/utils.dart';
 import 'package:tubes_kel3/widgets/bottom_appbar_detail.dart';
 import 'package:tubes_kel3/providers/scan_provider.dart';
+import 'package:tubes_kel3/data/ktm_database.dart';
+import 'package:tubes_kel3/routes/route.dart';
 
 class DetailKtm extends ConsumerStatefulWidget {
   final Item item;
@@ -219,8 +221,20 @@ class _DetailKtmState extends ConsumerState<DetailKtm> {
           ],
         ),
       ),
-      // Tambahkan navigation bar di bagian bawah
-      bottomNavigationBar: BottomAppDetail(),
+// Tambahkan navigation bar di bagian bawah
+      bottomNavigationBar: BottomAppDetail(
+        onSave: () async {
+          // if (item == null) return;
+
+          final fileByte = await capturedFile.readAsBytes();
+
+          KTMDatabase().save(widget.item, fileByte, fileByte);
+          Navigator.pushReplacementNamed(context, Routes.riwayat);
+        },
+        onRetake: () {
+          Navigator.popAndPushNamed(context, Routes.scan);
+        },
+      ),
     );
   }
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tubes_kel3/routes/route.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:camera/camera.dart';
+
+late List<CameraDescription> cameras;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +16,10 @@ Future main() async {
           projectId: 'ocr-mobile-6035f',
           storageBucket: 'ocr-mobile-6035f.appspot.com'),
     );
-  runApp(MyApp());
+  cameras = await availableCameras();
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

@@ -12,7 +12,13 @@ class CekrikButtonBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: onPressed,
+      onPressed: () {
+        // Panggil fungsi onPressed yang diberikan
+        onPressed();
+
+        // Setelah capture, arahkan ke halaman SimpanKTPPage
+        // Navigator.pushReplacementNamed(context, '/scan/detail');
+      },
       child: Icon(Icons.camera_outlined),
     );
   }

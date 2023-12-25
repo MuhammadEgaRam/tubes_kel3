@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tubes_kel3/utils.dart';
 import 'package:tubes_kel3/routes/route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,9 +17,24 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Menunggu selama 5 detik dan kemudian melakukan navigasi ke halaman "Sign In"
-    Future.delayed(Duration(seconds: 5), () {
-      Navigator.pushNamed(context, Routes.signIn);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (FirebaseAuth.instance.currentUser != null) {
+        // Jika pengguna sudah login, navigasi langsung ke halaman riwayat
+        Navigator.pushReplacementNamed(context, Routes.riwayat);
+      } else {
+        // Jika pengguna belum login, tunggu selama 5 detik
+        // dan navigasi ke halaman OnboardingContent
+        Future.delayed(Duration(seconds: 5), () {
+          // Cek apakah tampilan OnboardingScreen sudah pernah ditampilkan
+          if (Navigator.canPop(context)) {
+            // Jika sudah pernah ditampilkan, langsung keluar aplikasi
+            Navigator.pop(context);
+          } else {
+            // Jika belum pernah ditampilkan, navigasi ke halaman OnboardingContent
+            Navigator.pushReplacementNamed(context, Routes.OnboardingContent);
+          }
+        });
+      }
     });
   }
 
@@ -28,8 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
           255, 255, 255, 255), // Ganti warna latar belakang sesuai kebutuhan
       body: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(
-              context, Routes.signIn); // Navigasi ke halaman sign-in
+          // Navigator.pushNamed(
+          //     context, Routes.OnboardingContent); // Navigasi ke halaman sign-in
         },
         child: Center(
           child: Column(
@@ -39,12 +56,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: 170, height: 170), // Ganti dengan path logo Anda
               SizedBox(height: 16),
               Text(
-                'Testing',
+                'Test',
                 style: TextStyle(
                   fontFamily: 'Urbanist',
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff4a4a4a), // Ganti warna teks sesuai kebutuhan
+                  color: const Color(
+                      0xff4a4a4a), // Ganti warna teks sesuai kebutuhan
                 ),
               ),
             ],

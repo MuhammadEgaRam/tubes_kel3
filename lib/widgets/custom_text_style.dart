@@ -10,8 +10,8 @@ class CustomTextStyle extends StatelessWidget {
   CustomTextStyle({
     required this.text,
     this.fontSize = 20,
-    this.color = Colors.black,
-    this.fontWeight = FontWeight.normal,
+    this.color = const Color(0xff4a4a4a),
+    this.fontWeight = FontWeight.w400,
   });
 
   @override

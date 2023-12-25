@@ -13,6 +13,7 @@ class InitialData {
       tanggalsc: '12/30/2023',
       waktusc: '09:41',
       imageUrl: 'assets/images/mask-group.png',
+      wajahUrl: 'assets/images/mask-group.png',
       status: 'assets/images/yes.png',
     ),
   ];

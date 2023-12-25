@@ -3,67 +3,84 @@ import 'package:tubes_kel3/utils.dart';
 import 'package:tubes_kel3/routes/route.dart';
 
 class BottomAppDetail extends StatelessWidget {
+  final VoidCallback? onSave;
+  final VoidCallback? onRetake;
+
   const BottomAppDetail({
-    super.key,
-  });
+    Key? key,
+    this.onSave,
+    this.onRetake,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: Color(0xff03a1fe),
-      shape: CircularNotchedRectangle(),
-      notchMargin: 5.0,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Column(
-            mainAxisSize: MainAxisSize.min,
+    return SafeArea(
+      child: BottomAppBar(
+        color: Color(0xff03a1fe),
+        shape: CircularNotchedRectangle(),
+        notchMargin: 5.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 1.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.camera_alt_outlined,
-                    color: Colors.white, size: 27),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.scan);
-                },
-              ),
-              Text(
-                'Pindai Ulang',
-                style: SafeGoogleFont(
-                  'urbanist',
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+              Container(
+                constraints: BoxConstraints(
+                    maxHeight: 80.0), // Adjust the maxHeight as needed
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.camera_alt_outlined,
+                          color: Colors.white, size: 27),
+                      onPressed: () {
+                        onRetake?.call();
+                      },
+                    ),
+                    // Text(
+                    //   'Camera',
+                    //   style: SafeGoogleFont(
+                    //     'urbanist',
+                    //     fontWeight: FontWeight.w200,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 5.0,
-              )
-            ],
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.save_alt_outlined,
-                    color: Colors.white, size: 26),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.riwayat);
-                },
+              VerticalDivider(
+                color: Colors.white,
+                thickness: 1.0,
+                indent: 8.0,
+                endIndent: 8.0,
               ),
-              Text(
-                'Simpan',
-                style: SafeGoogleFont(
-                  'urbanist',
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+              Container(
+                constraints: BoxConstraints(
+                    maxHeight: 80.0), // Adjust the maxHeight as needed
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.save_alt_outlined,
+                          color: Colors.white, size: 26),
+                      onPressed: () {
+                        onSave?.call();
+                      },
+                    ),
+                    // Text(
+                    //   'Save',
+                    //   style: SafeGoogleFont(
+                    //     'urbanist',
+                    //     fontWeight: FontWeight.w200,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 5.0,
-              )
             ],
           ),
-        ],
+        ),
       ),
     );
   }

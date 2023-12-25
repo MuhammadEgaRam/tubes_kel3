@@ -11,6 +11,7 @@ import '../pages/detail_ktm.dart';
 import '../pages/splashscreen.dart';
 import '../data/data_detail.dart';
 import '../pages/tentang_kami.dart';
+import '../pages/onboard_screen.dart';
 
 
 class Routes {
@@ -25,10 +26,12 @@ class Routes {
   static const String profile= '/profile';
   static const String aboutUs= '/about_us';
   static const String logout = '/logout';
+    static const String OnboardingContent = '/onboard';
   
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => SplashScreen(),
+    OnboardingContent: (context) => OnboardingScreen(),
     signUp: (context) => pageSignUp(),
     signIn: (context) => pageSignIn(),
 
