@@ -7,10 +7,10 @@ class BottomAppDetail extends StatelessWidget {
   final VoidCallback? onRetake;
 
   const BottomAppDetail({
-    Key? key,
+    super.key,
     this.onSave,
     this.onRetake,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

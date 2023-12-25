@@ -1,16 +1,14 @@
 import 'dart:io';
-import 'package:tubes_kel3/main.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
+import 'package:tubes_kel3/main.dart';
 import 'package:tubes_kel3/providers/scan_provider.dart';
 import 'package:tubes_kel3/routes/route.dart';
-import 'package:tubes_kel3/widgets/capture.dart';
 import 'package:tubes_kel3/widgets/bottom_appbar.dart';
-import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tubes_kel3/models/item.dart';
+import 'package:tubes_kel3/widgets/capture.dart';
 
 class ScanState extends ConsumerStatefulWidget {
   @override
@@ -21,8 +19,6 @@ class _ScanState extends ConsumerState<ScanState> with WidgetsBindingObserver {
   File? capturedImage;
 
   CameraController? controller;
-
-  bool _isLoading = false;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -62,10 +58,6 @@ class _ScanState extends ConsumerState<ScanState> with WidgetsBindingObserver {
 
   void onTakePicture() async {
     try {
-      setState(() {
-        _isLoading = true;
-      });
-
       if (controller != null && controller!.value.isInitialized) {
         XFile xFile = await controller!.takePicture();
         final notifier = ref.read(scanProvider.notifier);
@@ -74,25 +66,16 @@ class _ScanState extends ConsumerState<ScanState> with WidgetsBindingObserver {
         notifier.updateCapturedImage(capturedImage!);
 
         print('sukses: $capturedImage');
-        final item = await sendFileToApi(capturedImage!);
-        Navigator.pushNamed(
-          context,
-          Routes.detail_scan,
-          arguments: {
-            "image": capturedImage,
-            "item": item,
-          },
-        );
+        Navigator.pushNamed(context, Routes.detail_scan,
+            arguments: capturedImage);
+
+        sendFileToApi(capturedImage!);
 
         setState(() {});
       }
     } catch (e) {
       print("Kesalahan saat mengambil gambar: $e");
       // Lakukan tindakan yang sesuai jika terjadi kesalahan
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 
@@ -132,13 +115,11 @@ class _ScanState extends ConsumerState<ScanState> with WidgetsBindingObserver {
           backgroundColor: Color(0xff03a1fe),
           automaticallyImplyLeading: false,
         ),
-        floatingActionButton: _isLoading
-            ? CircularProgressIndicator()
-            : CekrikButtonBar(
-                onPressed: () {
-                  onTakePicture();
-                },
-              ),
+        floatingActionButton: CekrikButtonBar(
+          onPressed: () {
+            onTakePicture();
+          },
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomApp(),
         body: Stack(
@@ -188,51 +169,35 @@ class _ScanState extends ConsumerState<ScanState> with WidgetsBindingObserver {
     );
   }
 
-  Future<Item?> sendFileToApi(File filePath) async {
-    final Dio dio = Dio(
-      BaseOptions(
-        baseUrl: 'https://6e22-114-6-31-174.ngrok-free.app/',
-        headers: {
-          'accept': 'application/json',
-        },
+  Future<void> sendFileToApi(File filePath) async {
+    final apiUrl = "https://c4dc-114-6-31-174.ngrok.io/upload";
+
+    final uri = Uri.parse(apiUrl);
+
+    var request = http.MultipartRequest("POST", uri);
+
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        filePath.readAsBytes().asStream(),
+        filePath.lengthSync(),
+        filename: filePath.path,
       ),
     );
+    request.headers.addAll(headers);
 
     try {
-      final response = await dio.post(
-        'upload',
-        data: FormData.fromMap({
-          'img': await MultipartFile.fromFile(
-            filePath.path,
-            filename: filePath.path.split('/').last,
-          ),
-        }),
-      );
+      // Send the request
+      final response = await request.send();
 
       if (response.statusCode == 200) {
         print('File uploaded successfully');
-        final data = response.data;
-
-        return Item(
-          nim: data['nim'] ?? '',
-          nama: data['nama'] ?? '',
-          ttl: data['ttl'] ?? '',
-          prodi: data['prodi'] ?? '',
-          alamat: data['alamat'] ?? '',
-          kec: data['kecamatan'] ?? '',
-          kab: data['kabupaten'] ?? '',
-          tanggalsc: data['tanggalsc'] ?? '',
-          waktusc: data['waktusc'] ?? '',
-          imageUrl: data['imageUrl'] ?? '',
-          wajahUrl: data['wajahUrl'] ?? '',
-          status: data['status'] ?? '',
-        );
       } else {
         print('Failed to upload file. Status code: ${response.statusCode}');
       }
     } catch (error) {
       print('Error uploading file: $error');
     }
-    return null;
-}
+  }
 }
