@@ -10,6 +10,7 @@ import '../pages/history_v1.dart';
 import '../pages/detail_ktm.dart';
 import '../pages/splashscreen.dart';
 import '../data/data_detail.dart';
+import '../models/item.dart';
 import '../pages/tentang_kami.dart';
 import '../pages/onboard_screen.dart';
 
@@ -26,7 +27,7 @@ class Routes {
   static const String profile= '/profile';
   static const String aboutUs= '/about_us';
   static const String logout = '/logout';
-    static const String OnboardingContent = '/onboard';
+  static const String OnboardingContent = '/onboard';
   
 
   static Map<String, WidgetBuilder> routes = {

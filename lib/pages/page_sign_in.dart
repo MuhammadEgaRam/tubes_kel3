@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:tubes_kel3/pages/page_sign_up.dart';
 import 'package:tubes_kel3/global/common/toast.dart';
 import 'package:tubes_kel3/pages/user_auth/firebase_auth_service.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class pageSignIn extends StatefulWidget {
@@ -104,40 +103,6 @@ class _pageSignIn extends State<pageSignIn> {
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: () {
-                _signInWithGoogle();
-              },
-              child: Container(
-                width: double.infinity,
-                height: 45,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.google,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Sign in with Google",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
             Container(
               padding: EdgeInsets.only(bottom: 10),
               child: Text(
@@ -190,30 +155,6 @@ class _pageSignIn extends State<pageSignIn> {
       Navigator.pushNamed(context, "/riwayat");
     } else {
       showToast(message: "some error occured");
-    }
-  }
-
-  _signInWithGoogle() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken,
-        );
-
-        await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/home");
-      }
-    } catch (e) {
-      showToast(message: "some error occured $e");
     }
   }
 }
