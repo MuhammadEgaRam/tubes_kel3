@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 class Item {
-  final Int id;
+  final int id; // Ubah tipe data menjadi int
   final String nim;
   final String nama;
   final String ttl;
@@ -17,7 +17,7 @@ class Item {
   final String status;
 
   Item({
-    required this.id,
+    required this.id, // Ubah tipe data menjadi int
     required this.nim,
     required this.nama,
     required this.ttl,
@@ -52,7 +52,7 @@ class Item {
 
   factory Item.fromJson(Map<String, dynamic> data) {
     return Item(
-      id: data['id'] ?? '',
+      id: data['id'] ?? 0, // Pastikan bahwa nilai id selalu bertipe int
       nim: data['nim'] ?? '',
       nama: data['nama'] ?? '',
       ttl: data['ttl'] ?? '',
@@ -68,6 +68,7 @@ class Item {
     );
   }
 }
+
 
 
 class FirestoreService {
