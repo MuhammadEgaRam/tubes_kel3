@@ -13,7 +13,7 @@ final List<OnboardModel> onboard_data = [
   OnboardModel(
       image: 'assets/images/logo.png',
       title: 'Selamat Datang',
-      description: 'Testing adalah Scanner KTM \nberbasis Mobile Android'),
+      description: 'SmartCard adalah Scanner KTM \nberbasis Mobile Android'),
   OnboardModel(
       image: 'assets/images/onboard1.png',
       title: 'OCR KTM Cepat',
@@ -22,5 +22,5 @@ final List<OnboardModel> onboard_data = [
       image: 'assets/images/onboard2.png',
       title: 'Data Aman',
       description:
-          'Testing melindungi data anda\ndengan mematuhu pedoman komunitas'),
+          'SmartCard melindungi data anda\ndengan mematuhu pedoman komunitas'),
 ];

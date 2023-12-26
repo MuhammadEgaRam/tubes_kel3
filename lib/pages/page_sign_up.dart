@@ -49,13 +49,13 @@ class _pageSignUpState extends State<pageSignUp> {
               Container(
                 padding: EdgeInsets.only(bottom: 30),
                 child: CustomTextStyle(
-                  text: 'Selamat Datang di Testing',
+                  text: 'Selamat Datang di SmartCard',
                   fontWeight: FontWeight.w600,
                   fontSize: 23,
                 ),
               ),
               Container(
-                child: CustomTextStyle(text: 'Buat akun Testing anda.'),
+                child: CustomTextStyle(text: 'Buat akun SmartCard anda.'),
               ),
               CustomTextField(
                 controller: _usernameController,

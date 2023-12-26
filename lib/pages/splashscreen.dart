@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: 170, height: 170), // Ganti dengan path logo Anda
               SizedBox(height: 16),
               Text(
-                'Test',
+                'SmartCard',
                 style: TextStyle(
                   fontFamily: 'Urbanist',
                   fontSize: 24,

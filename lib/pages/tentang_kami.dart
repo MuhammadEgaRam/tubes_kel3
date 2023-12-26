@@ -219,7 +219,7 @@ class TentangKami extends StatelessWidget {
               SizedBox(height: 100),
               Center(
                 child: Text(
-                  'Testing',
+                  'SmartCard',
                   textAlign: TextAlign.center,
                   style: SafeGoogleFont(
                     'Urbanist',

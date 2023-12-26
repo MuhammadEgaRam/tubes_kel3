@@ -48,7 +48,7 @@ class _pageSignIn extends State<pageSignIn> {
             Container(
                 padding: EdgeInsets.only(bottom: 40),
                 child: CustomTextStyle(
-                  text: 'Testing',
+                  text: 'SmartCard',
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
