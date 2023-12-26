@@ -1,6 +1,8 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 class Item {
-  final String id;
+  final Int id;
   final String nim;
   final String nama;
   final String ttl;
