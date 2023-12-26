@@ -48,14 +48,14 @@ class _pageSignIn extends State<pageSignIn> {
             Container(
                 padding: EdgeInsets.only(bottom: 40),
                 child: CustomTextStyle(
-                  text: 'SmartCard',
+                  text: 'Welcome Back 👋',
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                 )),
             Container(
                 child: CustomTextStyle(
-              text: 'Masuk ke akun Anda',
+              text: 'Sign to your account',
               fontSize: 17,
             )),
             Container(
