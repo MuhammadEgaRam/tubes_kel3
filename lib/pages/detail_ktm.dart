@@ -74,8 +74,30 @@ class _DetailKtmState extends ConsumerState<DetailKtm> {
             ),
             // Tambahkan kolom untuk detail hasil scan
             Column(
+
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                ListTile(
+                  title: Text(
+                    'Id',
+                    style: SafeGoogleFont(
+                      'Urbanist',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff4a4a4a),
+                  ),
+                ),
+                  subtitle: Text(
+                    widget.item.id,
+                    style: SafeGoogleFont(
+                      'Urbanist',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff808080),
+                    ),
+                  ),
+                ),
+
                 ListTile(
                   title: Text(
                     'NIM',
