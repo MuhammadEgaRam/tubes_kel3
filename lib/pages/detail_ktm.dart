@@ -88,7 +88,7 @@ class _DetailKtmState extends ConsumerState<DetailKtm> {
                   ),
                 ),
                   subtitle: Text(
-                    widget.item.id,
+                    widget.item.id as String,
                     style: SafeGoogleFont(
                       'Urbanist',
                       fontSize: 15,
