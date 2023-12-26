@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Item {
+  final String id;
   final String nim;
   final String nama;
   final String ttl;
@@ -13,6 +15,7 @@ class Item {
   final String status;
 
   Item({
+    required this.id,
     required this.nim,
     required this.nama,
     required this.ttl,
@@ -29,6 +32,7 @@ class Item {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'nim': nim,
       'nama': nama,
       'ttl': ttl,
@@ -46,18 +50,28 @@ class Item {
 
   factory Item.fromJson(Map<String, dynamic> data) {
     return Item(
-      nim: data['nim'] ??'',
-      nama: data['nama'] ??'',
-      ttl: data['ttl'] ??'',
-      prodi: data['prodi'] ??'',
-      alamat: data['alamat'] ??'',
-      kec: data['kecamatan'] ??'',
-      kab: data['kabupaten'] ??'',
-      waktusc: data['waktusc'] ??'',
-      imageUrl: data['imageUrl'] ??'',
-      wajahUrl: data['wajahUrl'] ??'',
-      status: data['status'] ??'',
-      tanggalsc: data['berlaku'] ??'',
+      id: data['id'] ?? '',
+      nim: data['nim'] ?? '',
+      nama: data['nama'] ?? '',
+      ttl: data['ttl'] ?? '',
+      prodi: data['prodi'] ?? '',
+      alamat: data['alamat'] ?? '',
+      kec: data['kecamatan'] ?? '',
+      kab: data['kabupaten'] ?? '',
+      waktusc: data['waktusc'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
+      wajahUrl: data['wajahUrl'] ?? '',
+      status: data['status'] ?? '',
+      tanggalsc: data['berlaku'] ?? '',
     );
+  }
+}
+
+
+class FirestoreService {
+  final CollectionReference items = FirebaseFirestore.instance.collection('items');
+
+  Future<void> createItem(Item item) async {
+    await items.add(item.toJson());
   }
 }
