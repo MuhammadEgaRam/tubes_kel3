@@ -40,31 +40,62 @@ class LogoutPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () async {
-                // Lakukan logout dari Firebase
-                await FirebaseAuth.instance.signOut();
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    // Lakukan logout dari Firebase
+                    await FirebaseAuth.instance.signOut();
 
-                // Navigasi ke halaman signIn
-                Navigator.pushNamed(context, Routes.signIn);
-              },
-              style: ButtonStyle(
-                minimumSize: MaterialStatePropertyAll(Size(100, 40)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
+                    // Navigasi ke halaman signIn
+                    Navigator.pushNamed(context, Routes.signIn);
+                  },
+                  style: ButtonStyle(
+                    minimumSize: MaterialStatePropertyAll(Size(100, 40)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'Iya',
+                    style: SafeGoogleFont(
+                      'Urbanist',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20),
+                TextButton(
+                onPressed: () {
+                  // Navigasi ke halaman settings
+                  Navigator.pop(context);
+                },
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(Size(100, 40)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 255, 0, 0)),
+                ),
+                child: Text(
+                  'Tidak',
+                  style: SafeGoogleFont(
+                    'Urbanist',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ),
-              child: Text(
-                'Iya',
-                style: SafeGoogleFont(
-                  'Urbanist',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                  color: Colors.white,
-                ),
-              ),
+
+              ],
             ),
           ],
         ),

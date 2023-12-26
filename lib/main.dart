@@ -26,6 +26,11 @@ class MyApp extends StatelessWidget {
       title: 'Scanner',
       initialRoute: Routes.splash, // Rute awal aplikasi
       routes: Routes.routes,
+      theme: ThemeData(
+        // Ganti warna background di sini
+        scaffoldBackgroundColor:
+            Color.fromARGB(255, 255, 255, 255), // Contoh warna putih
+      ),
     );
   }
 }
