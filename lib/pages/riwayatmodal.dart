@@ -136,7 +136,7 @@ class ModalRiwayat extends StatelessWidget {
                                 left: 8 *
                                     fem), // Tambahkan margin bawah dan margin kanan
                             child: buildInfoRowWithSizedBox(
-                                'Id', '0'),
+                                'Id', 0 as String),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
