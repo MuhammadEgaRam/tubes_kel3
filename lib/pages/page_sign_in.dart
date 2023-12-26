@@ -39,96 +39,167 @@ class _pageSignIn extends State<pageSignIn> {
         child: Column(
           children: [
             Container(
-                padding: EdgeInsets.only(top: 70),
-                child: const Image(
-                  image: AssetImage('assets/images/logo.png'),
-                  width: 150,
-                  height: 150,
-                )),
-            Container(
-                padding: EdgeInsets.only(bottom: 40),
-                child: CustomTextStyle(
-                  text: 'Welcome Back 👋',
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                )),
-            Container(
-                child: CustomTextStyle(
-              text: 'Sign to your account',
-              fontSize: 17,
-            )),
-            Container(
-              child: CustomTextField(
-                  controller: _emailController,
-                  hintText: 'Masukkan Email',
-                  inputType: TextInputType.emailAddress),
-            ),
-            Container(
-              child: CustomTextField(
-                controller: _passwordController,
-                hintText: 'Masukkan Password',
-                isPasswordField: true,
+              padding: EdgeInsets.only(top: 100),
+              child: const Image(
+                image: AssetImage('assets/images/logo.png'),
+                width: 100,
+                height: 100,
               ),
             ),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                children: <TextSpan>[
+                  TextSpan(text: 'Hi 👋,'),
+                ],
+              ),
+            ),
+            SizedBox(height: 8),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                children: <TextSpan>[
+                  TextSpan(text: 'Selamat Datang di '),
+                  TextSpan(
+                    text: 'SmartCard',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30),
+            Text(
+              'Masuk Ke Akun Kamu, Yuk!',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              'Pastikan email dan password kamu benar, ya.',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 35),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Email',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  CustomTextField(
+                    labelText: 'Email',
+                    controller: _emailController,
+                    hintText: 'Masukkan Email',
+                    inputType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Password',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  CustomTextField(
+                    labelText: 'Password',
+                    controller: _passwordController,
+                    hintText: 'Masukkan Password',
+                    isPasswordField: true,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 5),
             GestureDetector(
               onTap: () {
                 _signIn();
               },
               child: Container(
+                margin: EdgeInsets.only(top: 20),
                 alignment: Alignment.center,
-                constraints: BoxConstraints(
-                  minWidth: 300,
-                  minHeight: 50,
-                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: Colors.blue, // Sesuaikan dengan warna yang diinginkan
+                  color: Colors.blue,
                 ),
+                width: 300,
+                height: 50,
                 child: _isSigning
-                    ? CircularProgressIndicator(
-                        color: Colors.white,
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
                       )
-                    : Text(
-                        'Masuk',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors
-                              .white, // Sesuaikan dengan warna yang diinginkan
+                    : Center(
+                        child: Text(
+                          'Masuk',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.only(bottom: 10),
-              child: Text(
-                'Atau',
-                style: TextStyle(
-                  fontSize: 16,
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Kamu belum memiliki akun?"),
+                SizedBox(
+                  width: 5,
                 ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.signUp);
-              },
-              child: Container(
-                width: 300,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(color: Colors.blue),
-                ),
-                child: Center(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => pageSignUp(),
+                      ),
+                      (route) => false,
+                    );
+                  },
                   child: Text(
-                    'Daftar',
+                    "Daftar",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ),
+                )
+              ],
             ),
           ],
         ),
@@ -151,10 +222,10 @@ class _pageSignIn extends State<pageSignIn> {
     });
 
     if (user != null) {
-      showToast(message: "User is successfully signed in");
+      showToast(message: "Selamat, Kamu berhasil masuk akun kamu!");
       Navigator.pushNamed(context, "/riwayat");
     } else {
-      showToast(message: "some error occured");
+      showToast(message: "\t\t\t\t\t\t\tUps, ada yang salah. \nPeriksa lagi email atau password kamu.");
     }
   }
 }
