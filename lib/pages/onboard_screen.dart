@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tubes_kel3/routes/route.dart';
 
 class OnboardingContent extends StatelessWidget {
+  
   final String image;
   final String title;
   final String description;
@@ -101,21 +102,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       size: 24,
                     ),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        //untuk mengskip onboarding dan langsung ke home screen
+                   TextButton(
+                    onPressed: () {
+                      // Untuk mengskip onboarding dan langsung ke sign-in
+                      Navigator.pushReplacementNamed(context, Routes.signIn);
+                    },
+                    child: Text(
+                      'Skip',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 70, 187, 255),
+                      ),
+                    ),
+                  )
 
-                        // Navigator.push(context,
-
-                        //     MaterialPageRoute(builder: (context) => HomeScreen));
-                      },
-                      child: const Text(
-                        'Skip',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 70, 187, 255),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ))
                 ],
               ),
             ),
@@ -130,9 +130,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 itemCount: onboard_data.length,
                 controller: _pageController,
                 itemBuilder: (context, index) => OnboardingContent(
-                    image: onboard_data[index].image,
-                    title: onboard_data[index].title,
-                    description: onboard_data[index].description),
+                  image: onboard_data[index].image,
+                  title: onboard_data[index].title,
+                  description: onboard_data[index].description,
+                ),
               ),
             ),
             Row(
@@ -153,17 +154,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: const EdgeInsets.only(right: 40, left: 40),
               child: InkWell(
                 onTap: () {
-                  //untuk tombol dapat pindah menuju Home Screen
-
+                  // Jika tombol "Get Started" ditekan, langsung arahkan ke sign-in
                   if (_indexPage == onboard_data.length - 1) {
                     Navigator.pushReplacementNamed(context, Routes.signIn);
-                  }
-
-                  // untuk pindah ke halaman selanjutnya
-
-                  _pageController.nextPage(
+                  } else {
+                    // Jika bukan halaman terakhir, pindah ke halaman selanjutnya
+                    _pageController.nextPage(
                       duration: const Duration(milliseconds: 300),
-                      curve: Curves.ease);
+                      curve: Curves.ease,
+                    );
+                  }
                 },
                 child: Container(
                   width: double.infinity,

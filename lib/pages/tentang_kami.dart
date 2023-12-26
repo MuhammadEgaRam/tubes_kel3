@@ -233,7 +233,7 @@ class TentangKami extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),
                   child: Text(
-                    'Aplikasi ini kami buat untuk memenuhi tugas Ujian Tengah Semester',
+                    'Aplikasi ini kami buat untuk memenuhi tugas Ujian Akhir Semester',
                     textAlign: TextAlign.center,
                     style: SafeGoogleFont(
                       'Urbanist',
