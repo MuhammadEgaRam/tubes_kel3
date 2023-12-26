@@ -3,6 +3,7 @@ import 'package:tubes_kel3/models/item.dart';
 class InitialData {
   static List<Item> items = [
     Item(
+      id: '1',
       nim: '2141720143',
       nama: 'Muhammad Ega Rama Fernanda',
       ttl: 'Malang, 12-07-2002',
