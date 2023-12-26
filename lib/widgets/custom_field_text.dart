@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputType? inputType;
+  final TextAlign? textAlign;
 
   const CustomTextField({
     this.controller,
@@ -24,7 +25,8 @@ class CustomTextField extends StatefulWidget {
     this.onSaved,
     this.validator,
     this.onFieldSubmitted,
-    this.inputType
+    this.inputType, 
+    this.textAlign
   });
 
   @override
