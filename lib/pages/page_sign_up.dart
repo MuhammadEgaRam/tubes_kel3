@@ -36,101 +36,214 @@ class _pageSignUpState extends State<pageSignUp> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Form(
-          child: Center(
-            child: Column(children: [
-              Container(
-                  padding: EdgeInsets.symmetric(vertical: 50),
-                  child: const Image(
-                    image: AssetImage('assets/images/logo.png'),
-                    width: 100,
-                    height: 100,
-                  )),
-              Container(
-                padding: EdgeInsets.only(bottom: 30),
-                child: CustomTextStyle(
-                  text: 'Selamat Datang di SmartCard',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 23,
-                ),
-              ),
-              Container(
-                child: CustomTextStyle(text: 'Buat akun SmartCard anda.'),
-              ),
-              CustomTextField(
-                controller: _usernameController,
-                hintText: 'username',
-                isPasswordField: false,
-              ),
-              CustomTextField(
-                controller: _emailController,
-                hintText: 'Masukkan Email',
-                isPasswordField: false,
-              ),
-              CustomTextField(
-                controller: _passwordController,
-                hintText: 'Masukkan Password',
-                isPasswordField: true,
-              ),
-              CustomTextField(
-                labelText: 'Ulangi Password',
-                hintText: 'Masukkan Ulang Password',
-                isPasswordField: true,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _signUp();
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.blue, // Menambahkan warna latar belakang
-                  ),
-                  width: 300,
-                  height: 50,
-                  child: isSigningUp
-                      ? Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
+        body: ListView(
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 45),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Selamat Datang di '),
+                          TextSpan(
+                            text: 'SmartCard',
+                            style: TextStyle(color: Colors.blue),
                           ),
-                        )
-                      : Center(
-                          child: Text(
-                            'Daftar',
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Text(
+                      'Buat Akun SmartCard Kamu, Yuk!',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Lengkapi formulir di bawah ini dengan benar, ya.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 35),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Nama Lengkap',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: Colors.white, // Menambahkan warna teks
+                              color: Colors.black,
                             ),
                           ),
+                          SizedBox(height: 5),
+                          CustomTextField(
+                            labelText: 'Nama Lengkap',
+                            controller: _usernameController,
+                            hintText: 'Masukkan nama lengkap Kamu',
+                            isPasswordField: false,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Email',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          CustomTextField(
+                            labelText: 'Email',
+                            controller: _emailController,
+                            hintText: 'useremail@gmail.com',
+                            isPasswordField: false,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Password',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          CustomTextField(
+                            labelText: 'Password',
+                            controller: _passwordController,
+                            hintText: 'Minimal 8 karakter',
+                            isPasswordField: false,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Konfirmasi Password',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          CustomTextField(
+                            labelText: 'Konfirmasi Password',
+                            controller: _usernameController,
+                            hintText: 'Masukkan ulang password',
+                            isPasswordField: false,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    GestureDetector(
+                      onTap: () {
+                        _signUp();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 20),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.blue,
                         ),
+                        width: 300,
+                        height: 50,
+                        child: isSigningUp
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                  'Daftar',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Kamu sudah memiliki akun?"),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => pageSignIn(),
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          child: Text(
+                            "Masuk",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Already have an account?"),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => pageSignIn()),
-                            (route) => false);
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ))
-                ],
-              )
-            ]),
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -145,36 +258,17 @@ class _pageSignUpState extends State<pageSignUp> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    try {
-      // Membuat akun dengan email dan password
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-      // Mendapatkan objek User dari hasil pembuatan akun
-      User? user = userCredential.user;
+    setState(() {
+      isSigningUp = false;
+    });
 
-      // Memperbarui profil pengguna dengan menambahkan informasi username
-      await user?.updateProfile(displayName: username);
-
-      setState(() {
-        isSigningUp = false;
-      });
-
-      if (user != null) {
-        showToast(message: "User is successfully created");
-        Navigator.pushNamed(context, "/riwayat");
-      } else {
-        showToast(message: "Some error happened");
-      }
-    } catch (e) {
-      print('Error during sign up: $e');
-      showToast(message: "Some error happened");
-      setState(() {
-        isSigningUp = false;
-      });
+    if (user != null) {
+      showToast(message: "Selamat, kamu telah berhasil mendaftar!");
+      Navigator.pushNamed(context, "/riwayat");
+    } else {
+      showToast(message: "\t\tUps, ada yang salah. \nPeriksa lagi data kamu, ya.");
     }
   }
 }
