@@ -101,68 +101,76 @@ class ItemCard extends StatelessWidget {
             width: 297,
             height: 560,
             child: SingleChildScrollView(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffffffff),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        color: Colors.blue,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              'Detail',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffffffff),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Detail',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
                             ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah dan margin kanan
-                        child:
-                            buildInfoRowWithSizedBox('NIM', '2141720143'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah
-                        child: buildInfoRowWithSizedBox('Nama', 'Muhammad Ega Rama Fernanda'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah
-                        child: buildInfoRowWithSizedBox(
-                            'Tempat/Tgl Lahir', 'Malang, 12-07-2002'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah
-                        child: buildInfoRowWithSizedBox(
-                            'Prodi', 'D-IV T. Informatika'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah
-                        child: buildInfoRowWithSizedBox(
-                            'Alamat', 'JL. Mawar NO.39'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah
-                        child: buildInfoRowWithSizedBox('Kecamatan', '1/3 Penataban Giri'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8, top: 8), // Tambahkan margin bawah
-                        child: buildInfoRowWithSizedBox(
-                            'Kabupaten', 'Banyuwangi'),
-                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8,
+                          top: 8), // Tambahkan margin bawah dan margin kanan
+                      child: buildInfoRowWithSizedBox('id', '0'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8,
+                          top: 8), // Tambahkan margin bawah dan margin kanan
+                      child: buildInfoRowWithSizedBox('NIM', '2141720143'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8, top: 8), // Tambahkan margin bawah
+                      child: buildInfoRowWithSizedBox(
+                          'Nama', 'Muhammad Ega Rama Fernanda'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8, top: 8), // Tambahkan margin bawah
+                      child: buildInfoRowWithSizedBox(
+                          'Tempat/Tgl Lahir', 'Malang, 12-07-2002'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8, top: 8), // Tambahkan margin bawah
+                      child: buildInfoRowWithSizedBox(
+                          'Prodi', 'D-IV T. Informatika'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8, top: 8), // Tambahkan margin bawah
+                      child:
+                          buildInfoRowWithSizedBox('Alamat', 'JL. Mawar NO.39'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8, top: 8), // Tambahkan margin bawah
+                      child: buildInfoRowWithSizedBox(
+                          'Kecamatan', '1/3 Penataban Giri'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 8, top: 8), // Tambahkan margin bawah
+                      child:
+                          buildInfoRowWithSizedBox('Kabupaten', 'Banyuwangi'),
+                    ),
                   ],
                 ),
               ),
