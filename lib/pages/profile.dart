@@ -22,12 +22,13 @@ class ProfilePage extends StatelessWidget {
             'Urbanist',
             fontSize: 20,
             fontWeight: FontWeight.w600,
-            color: Color(0xffffffff),
+            color: Color(0xff4a4a4a),
           ),
+          textAlign: TextAlign.center,
         ),
-        backgroundColor: Color(0xff03a1fe),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Color(0xffffffff)),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Color(0xff4a4a4a)),
       ),
       body: Center(
         child: Column(
@@ -36,8 +37,8 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height:60, width: 100),
             Image(
               image: AssetImage('assets/images/healthicons-ui-user-profile-4iL.png'),
-              width: 100, // Atur lebar gambar sesuai kebutuhan
-              height: 100, // Atur tinggi gambar sesuai kebutuhan
+              width: 100, 
+              height: 100,
             ),
             SizedBox(height: 30),
             // Profil name
@@ -68,7 +69,7 @@ class ProfilePage extends StatelessWidget {
               ),
               child: CustomTextStyle(
                 text: user != null ? user.displayName ?? '' : '',
-                fontSize: 18, // Ubah ukuran font menjadi 18
+                fontSize: 18,
               ),
             ),
 
@@ -89,7 +90,7 @@ class ProfilePage extends StatelessWidget {
             ),
 
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0), // Padding di sekitar Container
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
               margin: EdgeInsets.only(left: 40, right: 40),
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(

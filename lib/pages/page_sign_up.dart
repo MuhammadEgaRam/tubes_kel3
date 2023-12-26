@@ -149,7 +149,7 @@ class _pageSignUpState extends State<pageSignUp> {
                             labelText: 'Password',
                             controller: _passwordController,
                             hintText: 'Minimal 8 karakter',
-                            isPasswordField: false,
+                            isPasswordField: true,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -171,9 +171,8 @@ class _pageSignUpState extends State<pageSignUp> {
                           SizedBox(height: 5),
                           CustomTextField(
                             labelText: 'Konfirmasi Password',
-                            controller: _usernameController,
                             hintText: 'Masukkan ulang password',
-                            isPasswordField: false,
+                            isPasswordField: true,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -265,7 +264,7 @@ class _pageSignUpState extends State<pageSignUp> {
     });
 
     if (user != null) {
-      showToast(message: "Selamat, kamu telah berhasil mendaftar!");
+      showToast(message: "\t\t\t\t\t\t\t\tSelamat, \nKamu telah berhasil mendaftar!");
       Navigator.pushNamed(context, "/riwayat");
     } else {
       showToast(message: "\t\tUps, ada yang salah. \nPeriksa lagi data kamu, ya.");

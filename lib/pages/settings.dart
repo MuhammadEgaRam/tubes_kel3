@@ -17,6 +17,7 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: Text(
           'Pengaturan',
           style: SafeGoogleFont(

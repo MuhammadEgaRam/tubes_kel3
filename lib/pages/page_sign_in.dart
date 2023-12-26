@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tubes_kel3/pages/page_sign_up.dart';
+import 'package:tubes_kel3/pages/onboard_screen.dart';
 import 'package:tubes_kel3/global/common/toast.dart';
 import 'package:tubes_kel3/pages/user_auth/firebase_auth_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,8 +39,26 @@ class _pageSignIn extends State<pageSignIn> {
       body: Center(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 45, left: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, Routes.OnboardingContent);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             Container(
-              padding: EdgeInsets.only(top: 100),
+              padding: EdgeInsets.only(top: 20),
               child: const Image(
                 image: AssetImage('assets/images/logo.png'),
                 width: 100,
@@ -222,7 +241,7 @@ class _pageSignIn extends State<pageSignIn> {
     });
 
     if (user != null) {
-      showToast(message: "Selamat, Kamu berhasil masuk akun kamu!");
+      showToast(message: "\t\t\t\t\t\t\t\t\t\t\tSelamat, \nKamu berhasil masuk akun kamu!");
       Navigator.pushNamed(context, "/riwayat");
     } else {
       showToast(message: "\t\t\t\t\t\t\tUps, ada yang salah. \nPeriksa lagi email atau password kamu.");
