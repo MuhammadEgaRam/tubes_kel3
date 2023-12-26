@@ -12,15 +12,15 @@ class OnboardModel {
 final List<OnboardModel> onboard_data = [
   OnboardModel(
       image: 'assets/images/logo.png',
-      title: 'Selamat Datang',
-      description: 'SmartCard adalah Scanner KTM \nberbasis Mobile Android'),
+      title: 'Innovation in Every Swipe',
+      description: 'SmartCard is an intelligent card integrating advanced technology for diverse practical applications.'),
   OnboardModel(
       image: 'assets/images/onboard1.png',
-      title: 'OCR KTM Cepat',
-      description: 'Nikmati Pengalaman OCR\nScan KTM dengan cepat dan akurat'),
+      title: 'Fast OCR KTM',
+      description: 'Enjoy the OCR Experience\nScan KTM quickly and accurately'),
   OnboardModel(
       image: 'assets/images/onboard2.png',
-      title: 'Data Aman',
+      title: 'Secure Data',
       description:
-          'SmartCard melindungi data anda\ndengan mematuhu pedoman komunitas'),
+          'SmartCard protects your data by adhering to community guidelines'),
 ];
