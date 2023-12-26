@@ -78,7 +78,7 @@ class _pageSignUpState extends State<pageSignUp> {
                 isPasswordField: true,
               ),
               GestureDetector(
-                onTap:  (){
+                onTap: () {
                   _signUp();
                 },
                 child: Container(
@@ -145,17 +145,36 @@ class _pageSignUpState extends State<pageSignUp> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    try {
+      // Membuat akun dengan email dan password
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-    setState(() {
-      isSigningUp = false;
-    });
+      // Mendapatkan objek User dari hasil pembuatan akun
+      User? user = userCredential.user;
 
-    if (user != null) {
-      showToast(message: "User is successfully created");
-      Navigator.pushNamed(context, "/riwayat");
-    } else {
-      showToast(message: "Some error happend");
+      // Memperbarui profil pengguna dengan menambahkan informasi username
+      await user?.updateProfile(displayName: username);
+
+      setState(() {
+        isSigningUp = false;
+      });
+
+      if (user != null) {
+        showToast(message: "User is successfully created");
+        Navigator.pushNamed(context, "/riwayat");
+      } else {
+        showToast(message: "Some error happened");
+      }
+    } catch (e) {
+      print('Error during sign up: $e');
+      showToast(message: "Some error happened");
+      setState(() {
+        isSigningUp = false;
+      });
     }
   }
 }

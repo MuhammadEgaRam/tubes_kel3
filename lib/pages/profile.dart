@@ -57,8 +57,22 @@ class ProfilePage extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(top: 10, bottom: 15, left: 13),
               alignment: Alignment.centerLeft,
-              child: CustomTextStyle(
-                text: user != null ? user.displayName ?? '' : '',
+              child: FutureBuilder<User?>(
+                future: FirebaseAuth.instance.authStateChanges().first,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Loading state
+                    return CircularProgressIndicator();
+                  } else {
+                    // Data loaded
+                    User? user = snapshot.data;
+                    String username = user?.displayName ?? '';
+
+                    return CustomTextStyle(
+                      text: username,
+                    );
+                  }
+                },
               ),
             ),
 
