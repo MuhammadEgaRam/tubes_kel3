@@ -1,6 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
-
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tubes_kel3/models/item.dart';
@@ -9,6 +10,8 @@ import 'package:tubes_kel3/widgets/bottom_appbar_detail.dart';
 import 'package:tubes_kel3/providers/scan_provider.dart';
 import 'package:tubes_kel3/data/ktm_database.dart';
 import 'package:tubes_kel3/routes/route.dart';
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
 class DetailKtm extends ConsumerStatefulWidget {
   final Item item;
@@ -20,10 +23,76 @@ class DetailKtm extends ConsumerStatefulWidget {
 }
 
 class _DetailKtmState extends ConsumerState<DetailKtm> {
+  File? _image;
+  String _result = "";
+
   @override
   Widget build(BuildContext context) {
     final capturedFile = ref.watch(scanProvider);
     print('captured image: $capturedFile');
+
+    Future<void> _uploadImage() async {
+      if (_image == null) {
+        return Future.value();
+      }
+
+      String apiUrl = "http://192.168.209.85:5000/result";
+      var uri = Uri.parse(apiUrl);
+
+      var request = http.MultipartRequest("POST", uri);
+      request.files
+          .add(await http.MultipartFile.fromPath('file', _image!.path));
+
+      try {
+        var response = await request.send();
+        if (response.statusCode == 200) {
+          var responseBody = await response.stream.bytesToString();
+          var result = json.decode(responseBody);
+
+          setState(() {
+            _result = jsonEncode(result);
+          });
+
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Hasil OCR"),
+                content: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildField("NIM", result['nim']),
+                      buildField("Nama", result['nama']),
+                      buildField("Tempat/Tgl Lahir", result['tempatTglLahir']),
+                      buildField("Prodi", result['prodi']),
+                      buildField("Alamat", result['alamat']),
+                      buildField("Kecamatan", result['kec']),
+                      buildField("Kabupaten", result['kab']),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          print("Error: ${response.reasonPhrase}");
+        }
+      } catch (error) {
+        print("Error: $error");
+      }
+
+      return Future.value();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -234,6 +303,24 @@ class _DetailKtmState extends ConsumerState<DetailKtm> {
         onRetake: () {
           Navigator.popAndPushNamed(context, Routes.scan);
         },
+      ),
+    );
+  }
+
+  Widget buildField(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: RichText(
+        text: TextSpan(
+          style: const TextStyle(fontSize: 16.0, color: Colors.white),
+          children: [
+            TextSpan(
+              text: "$label: ",
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: value),
+          ],
+        ),
       ),
     );
   }
